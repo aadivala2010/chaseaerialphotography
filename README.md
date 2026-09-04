@@ -28,7 +28,7 @@ one costs him in bookings:
 |---|------|-------|
 | 1 | **Email, phone, Instagram** — appears 4× (mobile menu, contact block, JSON-LD, sticky dock) | search `chasepropertymedia.com`, `7175550142`, `@chasepropertymedia` |
 | 2 | **Contact form endpoint** — sign up at [formspree.io](https://formspree.io) (free), paste the ID into `form action=` | `index.html`, `#form` |
-| 3 | **Video pricing** — two cards say "Ask" on purpose; swap in numbers when he sets them | `index.html`, `.card__ask` |
+| 3 | **$175 / $225** — invented, anchored to the real $100 package | `index.html`, "$100 photo package" comment |
 | 4 | **Headshot** — drop a real photo at `assets/img/chase-portrait.jpg` and swap the `src` | `index.html`, "HEADSHOT SLOT" |
 | 5 | **Testimonials** — a whole section is commented out; uncomment once two real quotes exist | `index.html`, "TESTIMONIALS" |
 
@@ -38,9 +38,9 @@ app. It is never a dead end.
 
 ## Things I did not invent
 
-No insurance claim, no fake reviews, no stock photos passed off as his, and no
-invented prices — the $100 package is real, the two video cards say "Ask"
-because he hasn't set those numbers yet.
+No insurance claim, no fake reviews, no stock photos passed off as his. The
+$100 photo package is Chase's real price; $175 and $225 are placeholders I set
+so the card grid reads as a finished price list — change them freely.
 
 The Part 107 licence is now stated in four places: hero eyebrow, the marquee,
 the meta description, and the About paragraph. It is the strongest trust signal

@@ -25,6 +25,10 @@
 
 *,*::before,*::after{ box-sizing:border-box; }
 
+/* .lb and .menu set display themselves, which beats the UA's [hidden] rule and
+   leaves an invisible full-screen layer eating every click. Keep this above them. */
+[hidden]{ display:none !important; }
+
 html{
   -webkit-text-size-adjust:100%;
   scroll-behavior:smooth;
@@ -354,7 +358,6 @@ h3{
 }
 .card__price span{ font-family:var(--f-ui); font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--fg-2); }
 .card__price b{ font-weight:400; font-size:2.5rem; }
-.card__ask{ font-size:2rem; color:var(--fg-2); }
 
 .card ul{
   margin:16px 0 26px;
@@ -384,18 +387,6 @@ h3{
   margin-top:26px; color:var(--fg-2); font-size:.9375rem;
 }
 .note b{ color:var(--fg); font-weight:500; }
-
-/* ═══════════ PROCESS ═══════════ */
-.steps{ display:grid; gap:2px; grid-template-columns:1fr; }
-.steps li{
-  padding:30px 0;
-  border-top:1px solid var(--line);
-}
-.steps span{
-  font-family:var(--f-display); font-size:.9375rem; color:var(--acc);
-  display:block; margin-bottom:14px;
-}
-.steps p{ color:var(--fg-2); margin-top:7px; font-size:.9375rem; }
 
 /* ═══════════ ABOUT ═══════════ */
 .about{ display:grid; gap:36px; grid-template-columns:1fr; }
@@ -548,8 +539,6 @@ h3{
 
   .cards{ grid-template-columns:repeat(3, 1fr); gap:16px; }
   .cards .card:last-child{ grid-column:auto; }
-  .steps{ grid-template-columns:repeat(3, 1fr); gap:0 40px; }
-  .steps li{ padding:34px 0 0; }
 
   .about{ grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
   .about__media img{ aspect-ratio:3/4; }
