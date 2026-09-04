@@ -31,8 +31,11 @@
 
 html{
   -webkit-text-size-adjust:100%;
-  scroll-behavior:smooth;
   scroll-padding-top:80px;
+  /* No scroll-behavior:smooth here — Chrome eases user scrolling too, which
+     makes a thumb-swipe glide much further than native. Anchors are smoothed
+     in main.js instead. scroll-padding-top still offsets for the fixed nav. */
+  overflow-x:clip;
 }
 
 body{
@@ -44,7 +47,6 @@ body{
   font-weight:350;
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
 }
 
 img{ display:block; max-width:100%; height:auto; }
@@ -560,7 +562,6 @@ h3{
 
 /* ═══════════ REDUCED MOTION ═══════════ */
 @media (prefers-reduced-motion:reduce){
-  html{ scroll-behavior:auto; }
   *,*::before,*::after{
     animation-duration:.01ms !important;
     transition-duration:.01ms !important;

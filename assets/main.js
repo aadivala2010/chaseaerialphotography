@@ -125,6 +125,17 @@
     x0 = null;
   }, { passive: true });
 
+  /* ── smooth anchors (CSS scroll-behavior would slow the whole page) ── */
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a || a.getAttribute('href') === '#') return;
+    const target = document.querySelector(a.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' });
+    history.pushState(null, '', a.getAttribute('href'));
+  });
+
   /* ── contact form ──────────────────────────────── */
   const form   = $('#form');
   const status = $('#status');
