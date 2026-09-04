@@ -13,11 +13,21 @@ Static site. No build step, no dependencies. Open `index.html` locally, or host 
 
 ```
 index.html
+checkout.html                  payment mockup — NOT wired up, see below
 assets/styles.css
 assets/main.js
 assets/img/aerial-01..04.jpg   Chase's real drone photos
 assets/img/chase.jpg           the old car selfie — not used, see below
 ```
+
+## checkout.html
+
+A non-functional preview of what paying would look like, for showing Chase
+before committing to the integration. Every input is `disabled` and prefilled
+with Stripe's public test card, there is no `<form>`, and no request is made
+anywhere — it cannot collect a card number even by accident. Banner at the top
+says so. Not linked from the site and `noindex`; reach it at `/checkout.html`.
+Delete the file if he passes on payments.
 
 ## Swap the placeholders
 

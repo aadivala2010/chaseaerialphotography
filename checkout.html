@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Checkout preview — Chase Property Media</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A0A0B'/%3E%3Crect x='8.5' y='8.5' width='15' height='15' rx='4' fill='none' stroke='%23D9A05B' stroke-width='1.6'/%3E%3Ccircle cx='16' cy='16' r='2.4' fill='%23D9A05B'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300..700&display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  /* checkout-only styles — kept off the main stylesheet so the live site
+     doesn't carry weight for a page most visitors never see */
+  body{ min-height:100dvh; display:flex; flex-direction:column; }
+
+  .banner{
+    background:rgba(217,160,91,.12);
+    border-bottom:1px solid rgba(217,160,91,.34);
+    color:var(--acc);
+    font-size:.8125rem; line-height:1.45;
+    padding:12px var(--pad);
+    text-align:center;
+  }
+  .banner b{ font-weight:600; }
+
+  .co-nav{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1040px; margin-inline:auto; width:100%;
+    padding:20px var(--pad);
+  }
+  .co-secure{
+    display:flex; align-items:center; gap:7px;
+    font-size:.75rem; letter-spacing:.09em; text-transform:uppercase; color:var(--fg-2);
+  }
+  .co-secure svg{ width:14px; height:14px; }
+
+  .co{
+    flex:1;
+    display:grid; gap:0;
+    grid-template-columns:1fr;
+    max-width:1040px; margin-inline:auto; width:100%;
+    padding:0 var(--pad) 64px;
+  }
+
+  .co__side{ padding-bottom:40px; }
+  .co__pay{ padding-top:36px; border-top:1px solid var(--line); }
+
+  .co h1{ font-size:clamp(1.75rem,5.4vw,2.25rem); line-height:1.16; margin-bottom:6px; }
+  .co h2{ font-size:1rem; font-family:var(--f-ui); font-weight:500; letter-spacing:0; margin-bottom:20px; }
+
+  /* ── order summary ── */
+  .line{
+    display:flex; justify-content:space-between; gap:20px;
+    padding:14px 0; border-bottom:1px solid var(--line);
+    font-size:.9375rem;
+  }
+  .line span:first-child{ color:var(--fg-2); }
+  .line--total{
+    border-bottom:0; padding-top:18px;
+    font-size:1.125rem; color:var(--fg);
+  }
+  .line--total span:first-child{ color:var(--fg); }
+  .line--total b{ font-family:var(--f-display); font-size:1.75rem; font-weight:400; }
+  .line--muted{ font-size:.8125rem; color:var(--fg-2); border-bottom:0; padding-top:4px; }
+
+  .booking{
+    display:flex; gap:14px; align-items:center;
+    padding:16px; margin-bottom:24px;
+    background:var(--ink-3); border:1px solid var(--line); border-radius:12px;
+  }
+  .booking img{ width:72px; height:56px; object-fit:cover; border-radius:8px; flex:none; }
+  .booking p{ font-size:.9375rem; }
+  .booking small{ display:block; color:var(--fg-2); font-size:.8125rem; margin-top:3px; }
+
+  /* ── payment fields ── */
+  .row{ display:flex; gap:10px; }
+  .row > *{ flex:1; }
+
+  .fld{ margin-bottom:16px; }
+  .fld label{
+    display:block; margin-bottom:8px;
+    font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--fg-2);
+  }
+  .fld input{
+    width:100%; min-height:52px; padding:14px 16px;
+    background:var(--ink-3); border:1px solid var(--line); border-radius:10px;
+    color:var(--fg); font-family:inherit; font-size:16px;
+    cursor:not-allowed;
+  }
+  .card-group input{ border-radius:0; margin-top:-1px; }
+  .card-group input:first-child{ border-radius:10px 10px 0 0; margin-top:0; }
+  .card-group .row input:first-child{ border-radius:0 0 0 10px; }
+  .card-group .row input:last-child{ border-radius:0 0 10px 0; margin-left:-1px; }
+
+  .brandmarks{ display:flex; gap:6px; margin-top:10px; }
+  .brandmarks span{
+    font-size:.625rem; letter-spacing:.08em; color:var(--fg-2);
+    border:1px solid var(--line); border-radius:4px; padding:3px 7px;
+  }
+
+  .paybtn{ width:100%; margin-top:8px; }
+  .fineprint{
+    margin-top:18px; font-size:.75rem; line-height:1.6; color:var(--fg-2); text-align:center;
+  }
+
+  /* ── success state ── */
+  .done{ text-align:center; padding:20px 0 8px; }
+  .done__tick{
+    width:64px; height:64px; margin:0 auto 24px;
+    border-radius:50%; display:grid; place-content:center;
+    background:rgba(217,160,91,.14); border:1px solid rgba(217,160,91,.4);
+  }
+  .done__tick svg{ width:28px; height:28px; color:var(--acc); }
+  .done h2{ font-family:var(--f-display); font-size:1.75rem; font-weight:400; margin-bottom:12px; }
+  .done p{ color:var(--fg-2); font-size:.9375rem; max-width:38ch; margin-inline:auto; }
+  .done .recap{
+    margin-top:28px; padding:18px; text-align:left;
+    background:var(--ink-3); border:1px solid var(--line); border-radius:12px;
+  }
+  .replay{
+    display:inline-flex; align-items:center; gap:8px;
+    margin-top:28px; min-height:44px;
+    color:var(--acc); font-size:.875rem;
+    background:none; border:0; cursor:pointer; font-family:inherit;
+  }
+
+
+  @media (min-width:840px){
+    .co{ grid-template-columns:1fr 1fr; gap:72px; padding-top:24px; }
+    .co__side{ padding-bottom:0; }
+    .co__pay{ padding-top:0; border-top:0; }
+  }
+</style>
+</head>
+<body>
+
+<p class="banner">
+  <b>Preview only.</b> This is a design mockup, not a live payment page — the fields are
+  switched off and nothing is sent anywhere.
+</p>
+
+<header class="co-nav">
+  <a class="brand" href="index.html" aria-label="Chase Property Media — home">
+    <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
+      <rect x="7" y="7" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="16" cy="16" r="2.6" fill="currentColor"/>
+    </svg>
+    <span class="brand__txt">Chase&nbsp;Property&nbsp;Media</span>
+  </a>
+  <span class="co-secure">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="4" y="9" width="12" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+    Secure checkout
+  </span>
+</header>
+
+<main class="co" id="co">
+
+  <!-- ── left: what they're paying for ── -->
+  <section class="co__side">
+    <h1>Hold your date</h1>
+    <p class="meta" style="margin-bottom:28px">Deposit now, balance when the photos land.</p>
+
+    <div class="booking">
+      <img src="assets/img/aerial-03.jpg" alt="" width="1500" height="844">
+      <div>
+        <p>Aerial Photo Package</p>
+        <small>Sat 12 Sep, 10:00 AM &middot; 4–6 edited photos</small>
+      </div>
+    </div>
+
+    <h2>Summary</h2>
+    <div class="line"><span>Aerial Photo Package</span><span>$100.00</span></div>
+    <div class="line"><span>Travel — Ocean City, NJ</span><span>$0.00</span></div>
+    <div class="line"><span>Balance due on delivery</span><span>−$75.00</span></div>
+    <div class="line line--total"><span>Due today</span><b>$25.00</b></div>
+    <div class="line line--muted">
+      The remaining $75.00 is invoiced when your edited photos are delivered.
+    </div>
+  </section>
+
+  <!-- ── right: the payment step ── -->
+  <section class="co__pay" id="payStep">
+    <h2>Payment details</h2>
+
+    <div class="fld">
+      <label for="em">Email</label>
+      <input id="em" type="email" value="jordan@bhhsrealty.com" disabled>
+    </div>
+
+    <div class="fld card-group">
+      <label for="cc">Card information</label>
+      <input id="cc" type="text" value="4242 4242 4242 4242" disabled>
+      <div class="row">
+        <input type="text" value="12 / 28" aria-label="Expiry" disabled>
+        <input type="text" value="123" aria-label="CVC" disabled>
+      </div>
+      <div class="brandmarks"><span>VISA</span><span>MC</span><span>AMEX</span><span>DISC</span></div>
+    </div>
+
+    <div class="fld">
+      <label for="nm">Name on card</label>
+      <input id="nm" type="text" value="Jordan Reyes" disabled>
+    </div>
+
+    <div class="fld">
+      <label for="zip">ZIP</label>
+      <input id="zip" type="text" value="08226" disabled>
+    </div>
+
+    <button class="btn btn--full paybtn" id="pay" type="button">Pay $25.00</button>
+
+    <p class="fineprint">
+      Payments would be processed by Stripe. Card details never touch this site.
+    </p>
+  </section>
+
+  <!-- ── right: what he sees after ── -->
+  <section class="co__pay done" id="doneStep" hidden>
+    <div class="done__tick">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h2>Date held</h2>
+    <p>A confirmation and calendar invite are on the way. Chase has been notified.</p>
+
+    <div class="recap">
+      <div class="line"><span>Shoot</span><span>Sat 12 Sep, 10:00 AM</span></div>
+      <div class="line"><span>Paid today</span><span>$25.00</span></div>
+      <div class="line line--muted" style="padding-top:14px">Balance of $75.00 due on delivery.</div>
+    </div>
+
+    <button class="replay" id="replay" type="button">
+      <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M13 8a5 5 0 1 1-1.6-3.7M13 2v3h-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Replay the demo
+    </button>
+  </section>
+
+</main>
+
+<script>
+  // Demo only: flips between the two states so Chase can see both halves.
+  // No network calls, no data collected — every field above is disabled.
+  const pay = document.getElementById('pay');
+  const payStep = document.getElementById('payStep');
+  const doneStep = document.getElementById('doneStep');
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  pay.addEventListener('click', () => {
+    pay.disabled = true;
+    pay.textContent = 'Processing…';
+    setTimeout(() => {
+      payStep.hidden = true;
+      doneStep.hidden = false;
+      doneStep.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'nearest' });
+    }, calm ? 0 : 900);
+  });
+
+  document.getElementById('replay').addEventListener('click', () => {
+    doneStep.hidden = true;
+    payStep.hidden = false;
+    pay.disabled = false;
+    pay.textContent = 'Pay $25.00';
+  });
+</script>
+</body>
+</html>
