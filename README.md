@@ -1,8 +1,15 @@
 # Chase Property Media — site
 
-Static site. No build step, no dependencies. Open `index.html` or drag the whole
-folder onto [app.netlify.com/drop](https://app.netlify.com/drop) — it's live in
-about ten seconds, then point the domain at it in Site settings → Domain.
+Static site. No build step, no dependencies. Open `index.html` locally, or host it:
+
+- **GitHub Pages** (already where this repo lives) — Settings → Pages → Source:
+  Deploy from a branch → `main` / `/ (root)` → Save. Live at
+  `aadivala2010.github.io/chaseaerialphotography` in a minute. Custom domain
+  goes in the same panel.
+- **Netlify** — drag the folder onto [app.netlify.com/drop](https://app.netlify.com/drop).
+  Worth it if you want the contact form handled without Formspree: add
+  `netlify` and `name="contact"` to the `<form>` tag and Netlify captures
+  submissions itself.
 
 ```
 index.html
